@@ -1,0 +1,17 @@
+# Lembrando que: Os manifestos são Pod.
+
+apiVersion: v1 #Versão da api
+kind: Pod #Tipo do recurso
+
+metadata:
+  name: my-pod-webserver #Nome do recurso
+  labels: #As etiquetas (apps e/ou tier);
+    apps: my-app #Outro tipo de etiquetas
+    tier: frontend #Outro tipo de etiquetas
+
+#Especificações
+spec:
+  containers: #Informações do container
+    - name: my-container-nginx # Nome do seu container
+      image: nginx
+#Obs: NGINX, servidores web para navegação HTTP. Hoje, porém, ele também funciona como proxy reverso e balanceador de carga HTTP.
