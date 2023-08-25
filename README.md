@@ -47,3 +47,17 @@ O Kubelet entra em contato com o Runtime e o Runtime executa os containers, semp
 <div align="center">
     <img src="./assets/exemplo_Runtime.png"/>
 </div>
+
+# Minikube
+
+Para realizar os testes precisara ter instalado o minikube e que ele esteja rodando.
+
+Minikube => O Minikube é uma implementação leve do Kubernetes que cria uma VM em sua máquina local e implanta um cluster simples contendo apenas um nó.
+
+# Comandos
+
+1. CRIAÇÃO de um Pod atraves de um arquivo => kubectl (create ou apply) -f {ARQUIVO.yml}
+
+2. DELETAR um pod => kubectl delete pods {ARQUIVO.yml}
+
+3. VISUALIZAR pods => kubectl get pods
