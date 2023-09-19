@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+
+spec:
+  template:
+    metadata:
+      name: pod-my-nginx
+      labels:
+        env: production
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+
+  selector:
+    matchLabels: #Aqui se tivesse outra POD com outra env teria que especifica-la
+      env: production
+  replicas: 4

@@ -60,6 +60,17 @@ Comando para execução: minikube start
 
 Controla o aumento e reduz as quanitdades de PODs.
 
+# Deployments
+
+Como default, ele observa qual POD está com menos usuarios utilizando, então ele faz o deployment nele primeiro o derrubando e instalando a nova versão, ve se está tudo bem e depois disto vai passando em todas as outras. Se houve um problema na 1 atualização ele pararia nesta com o erro e nao executaria para o proximo POD.
+
+<div align="center">
+    <img src="./assets/exemplo_Deployments.png"/>
+</div>
+
+Quando terminado de executar de um `kubectl get deployments`que vc conseguirá ver os deployments.
+O Deployments gera automaticamente um ReplicaSet e PODs criando a partir do numero de replicas no arquivo YML.
+
 # Comandos
 
 1. CRIAÇÃO de um Pod atraves de um arquivo => kubectl (create ou apply) -f {ARQUIVO.yml}
@@ -68,4 +79,30 @@ Controla o aumento e reduz as quanitdades de PODs.
 
 3. VISUALIZAR pods => kubectl get pods
 
-4. VISUALIZAR replicasets => kubectl get replicasets
+4. VISUALIZAR replicaset => kubectl get replicasets
+
+5. VISUALIZAR deployment => kubectl get deployments
+
+6. ROLLOUT deployment => kubectl rollout status deployment.apps/frontend-deployment
+
+7. Para DESCRIÇÃO MAIS DETALHADA do Deployment => kubectl describe deployment.apps/frontend-deployment
+
+8. Historio do seu deployment => kubectl rollout history deployment.apps/frontend-deployment
+
+Obs: itens 6,7 e 8 o `deployment.apps/frontend-deployment` é o nome do deployment pego pelo comando `kubectl get deployments`
+Para visualizar a revisão das mudanças mude a imagem utilizada, para que gere uma nova versão e ai mudando ficara igual na imagem:
+
+<div align="center">
+    <img src="./assets/exemplo_deployment_history.png"/>
+</div>
+Para observer a mudança de uma versão especifica, execute o comando:
+
+kubectl rollout history deployment.apps/frontend-deployment --revision=2
+
+9. Realização de ROLLBACK => kubectl rollout undo deployment.apps/frontend-deployment
+
+Caso executado conforme a imagem listada no topico 8. O Kubernets iria criar uma nova VERSÃO com o numero 6 mas se referindo as descrições e implementações da VERSÃO 4
+
+Caos queira uma VERSÃO especifica => kubectl rollout undo deployment.apps/frontend-deployment --to-revision=2
+
+10. Ainda temos o rollout PAUSE e RESUME => kubectl rollout {pause/resume} deployment.apps/frontend-deployment
