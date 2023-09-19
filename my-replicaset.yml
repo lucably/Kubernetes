@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend-rs
+  labels:
+    app: frontend
+
+spec:
+  template: #A partir daqui para baixo e a construção do POD
+    metadata:
+      name: my-pod-webserver-rs
+      labels:
+        apps: my-app
+        tier: frontend
+    spec: #Especificações do POD onde faz a definição dos container
+      containers:
+        - name: my-container-nginx
+          image: nginx
+
+  selector: #importante para o ReplicaSet = rs (responsavel por selecionar qual POD ira contrar as replicas)
+    matchLabels:
+      apps: my-app #Nome referente ao elemento da linha 13
+  replicas: 4 #Informa quantas copias do POD sera criada
+
+#Para escalar as replicas utilizando o terminal basta executar o comando:
+# kubectl scale replicasets frontend-rs --replicas=5
