@@ -54,6 +54,12 @@ Para realizar os testes precisara ter instalado o minikube e que ele esteja roda
 
 Minikube => O Minikube é uma implementação leve do Kubernetes que cria uma VM em sua máquina local e implanta um cluster simples contendo apenas um nó.
 
+Comando para execução: minikube start
+
+# ReplicaSet
+
+Controla o aumento e reduz as quanitdades de PODs.
+
 # Comandos
 
 1. CRIAÇÃO de um Pod atraves de um arquivo => kubectl (create ou apply) -f {ARQUIVO.yml}
@@ -61,3 +67,5 @@ Minikube => O Minikube é uma implementação leve do Kubernetes que cria uma VM
 2. DELETAR um pod => kubectl delete pods {ARQUIVO.yml}
 
 3. VISUALIZAR pods => kubectl get pods
+
+4. VISUALIZAR replicasets => kubectl get replicasets
