@@ -71,6 +71,36 @@ Como default, ele observa qual POD está com menos usuarios utilizando, então e
 Quando terminado de executar de um `kubectl get deployments`que vc conseguirá ver os deployments.
 O Deployments gera automaticamente um ReplicaSet e PODs criando a partir do numero de replicas no arquivo YML.
 
+# Kubernetes Network
+
+1. Container to Container Communication:
+
+Isso é quando um POD tem 2 container rodando dentro dele, eles compartilham o mesmo host networks, ou seja, cada POD tera seu endereço IP e os container compartilham o mesmo endereço IP (ambos possuem o mesmo endereço IP) mas utilizam PORTAS diferentes para se comunicarem (isso no mesmo POD).
+
+<div align="center">
+    <img src="./assets/exemplo_containerToContainer.png"/>
+</div>
+
+2. Pod to Pod Communication:
+
+2.1) Comunicação entre PODs rodando em um unico single Node, chamado `INTRA-node Pod Network`. Todos os endereços do IP dos PODs serão diferentes e atribuidos graças a minha rede local compartilhando o mesmo HOST. A comunicação entre esses 2 PODs acontece dentro do mesmo Worker Node, ele virtualiza uma rede dentro do Worker Node que serve para realizar a comunicação desses 2 Pods. Fazendo com que o `Container(C2) do POD 1` se comunique com o `Container(C1) do POD 2.`
+
+<div align="center">
+    <img src="./assets/exemplo_PodToPod.png"/>
+</div>
+
+2.2) Comunicação entre pods rodando em Worker Node diferentes, chamado `INTER-node Pod Network`. Um exp seria o `Worker Node 1` está localizado em minha maquina e o `Worker Node 2` estando na nuvem, no AWS, por exemplo. A comunicação acontece graças ao plugin do kubernetes (K8s) que ira criar as tabelas de rotas para que um container em um Pod em `Worker Node 1` se comunique com um Container em um Pod do `Worder Node 2`.
+
+<div align="center">
+    <img src="./assets/exemplo_PodToPod_Inter.png"/>
+</div>
+
+Exemplo dos dois PODs em execução entre tomcat e redis
+
+<div align="center">
+    <img src="./assets/exemplo_network_working.png"/>
+</div>
+
 # Comandos
 
 1. CRIAÇÃO de um Pod atraves de um arquivo => kubectl (create ou apply) -f {ARQUIVO.yml}
